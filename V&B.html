@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nortbras - Conexão Vital ❤️</title>
+    <style>
+        :root { --ouro: #ffcc00; --perigo: #ff3300; --azul: #001a33; }
+        body { font-family: 'Segoe UI', sans-serif; background: #0a0e12; color: white; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; text-align: center; }
+        .love-container { background: var(--azul); padding: 25px; border-radius: 30px; border: 3px solid var(--ouro); width: 85%; max-width: 380px; box-shadow: 0 0 30px rgba(255,204,0,0.3); }
+        .couple-photos { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 20px; }
+        .photo-frame { width: 80px; height: 80px; border-radius: 50%; border: 2px solid var(--ouro); overflow: hidden; background: #000; }
+        .photo-frame img { width: 100%; height: 100%; object-fit: cover; }
+        .heart-icon { font-size: 20px; color: var(--perigo); animation: beat 0.8s infinite; }
+        @keyframes beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.3); } }
+        h1 { color: var(--ouro); font-size: 16px; text-transform: uppercase; }
+        input { width: 70%; padding: 10px; border-radius: 10px; border: 2px solid var(--ouro); background: #000; color: var(--ouro); font-size: 18px; text-align: center; margin-bottom: 15px; outline: none; }
+        .btn { background: var(--ouro); color: var(--azul); padding: 12px; border: none; border-radius: 10px; font-weight: 900; font-size: 14px; cursor: pointer; text-transform: uppercase; width: 80%; }
+        #analise-section, #resultado-final, #roleta-section { display: none; }
+        .loading-bar { width: 100%; height: 8px; background: #222; border-radius: 4px; margin: 15px 0; overflow: hidden; }
+        .progress { width: 0%; height: 100%; background: var(--ouro); }
+        .alerta-voltagem { background: var(--perigo); color: white; padding: 8px; font-weight: bold; border-radius: 5px; animation: flash 0.5s infinite; margin: 10px 0; font-size: 12px; }
+        @keyframes flash { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .voltagem-valor { font-size: 40px; color: var(--ouro); font-weight: 900; display: block; }
+        .compatibilidade { color: #00ff00; font-weight: bold; font-size: 14px; margin-bottom: 10px; border: 1px solid #00ff00; padding: 5px; border-radius: 5px; display: inline-block; }
+        .wheel-box { position: relative; width: 180px; height: 180px; margin: 20px auto; }
+        .wheel-img { width: 100%; height: 100%; border-radius: 50%; border: 5px solid var(--ouro); transition: transform 4s cubic-bezier(0.15, 0, 0.15, 1); object-fit: cover; }
+        .pointer { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); font-size: 30px; z-index: 10; }
+        #premio-texto { font-size: 16px; color: var(--ouro); font-weight: bold; margin-top: 15px; line-height: 1.5; }
+        .resgate { color: white; font-size: 14px; display: block; margin-top: 10px; font-style: italic; background: rgba(255, 0, 0, 0.4); padding: 8px; border-radius: 5px; border: 1px solid var(--ouro); }
+    </style>
+</head>
+<body>
+<div class="love-container">
+    <div id="pergunta-section">
+        <div class="couple-photos">
+            <div class="photo-frame"><img src="bruna.html"></div>
+            <div class="heart-icon">❤️</div>
+            <div class="photo-frame"><img src="eu.html"></div>
+        </div>
+        <h1>AFINIDADE NORTBRAS</h1>
+        <p style="font-size:12px;">Bruna, qual seu nível de interesse no Vagner?</p>
+        <input type="number" id="nivelBruna" placeholder="0-100">
+        <button class="btn" onclick="iniciarAnalise()">ANALISAR</button>
+    </div>
+
+    <div id="analise-section">
+        <h2 style="color:var(--ouro); font-size:14px;">ANALISANDO COMPATIBILIDADE...</h2>
+        <div class="loading-bar"><div class="progress" id="bar"></div></div>
+    </div>
+
+    <div id="resultado-final">
+        <div class="compatibilidade">✓ ALTA COMPATIBILIDADE DETECTADA</div>
+        <h1>RESULTADO FINAL</h1>
+        <span id="resVagner" class="voltagem-valor">0%</span>
+        <div class="alerta-voltagem">⚡ ALTA VOLTAGEM: VAGNER & BRUNA ⚡</div>
+        <button class="btn" onclick="irParaRoleta()">RESGATAR MEU PRÊMIO</button>
+    </div>
+
+    <div id="roleta-section">
+        <h1>ROLETA DE MIMOS ❤️</h1>
+        <div class="wheel-box">
+            <div class="pointer">👇</div>
+            <img src="eu.html" class="wheel-img" id="wheel">
+        </div>
+        <button class="btn" id="btn-girar" onclick="girarRoleta()">GIRAR</button>
+        <div id="premio-texto"></div>
+    </div>
+</div>
+
+<script>
+    function iniciarAnalise() {
+        const nivel = document.getElementById('nivelBruna').value;
+        if (!nivel) return alert("Digita um número!");
+        document.getElementById('pergunta-section').style.display = 'none';
+        document.getElementById('analise-section').style.display = 'block';
+        let width = 0;
+        const bar = document.getElementById('bar');
+        const interval = setInterval(() => {
+            width++;
+            bar.style.width = width + '%';
+            if (width >= 100) {
+                clearInterval(interval);
+                document.getElementById('analise-section').style.display = 'none';
+                document.getElementById('resultado-final').style.display = 'block';
+                document.getElementById('resVagner').innerText = (parseInt(nivel) * 10) + 1000 + "%";
+            }
+        }, 30);
+    }
+    function irParaRoleta() {
+        document.getElementById('resultado-final').style.display = 'none';
+        document.getElementById('roleta-section').style.display = 'block';
+    }
+    function girarRoleta() {
+        const wheel = document.getElementById('wheel');
+        const texto = document.getElementById('premio-texto');
+        const premios = ["Uma noite com o Vagner! 🍷", "1 Beijo apaixonado! 💋", "Massagem relaxante! 💆‍♀️", "10 Beijos! 😘", "Uma Viagem Especial! ✈️", "Namorar! ❤️", "Casar! 💍"];
+        const sorteio = premios[Math.floor(Math.random() * premios.length)];
+        const graus = 2000 + Math.floor(Math.random() * 2000);
+        wheel.style.transform = `rotate(${graus}deg)`;
+        document.getElementById('btn-girar').style.display = "none";
+        texto.innerText = "Sorteando...";
+
+        setTimeout(() => { 
+            texto.innerHTML = "🎉 VOCÊ GANHOU:<br>" + sorteio + "<br><span class='resgate'>⚠️ Pegue seu prêmio agora com o Vagner!</span>"; 
+        }, 4000);
+    }
+</script>
+</body>
+</html>
