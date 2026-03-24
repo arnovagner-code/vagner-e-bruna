@@ -70,4 +70,40 @@
 
 <script>
     function iniciarAnalise() {
-        const nivel = document.getElementById('nivelBruna').
+        const nivel = document.getElementById('nivelBruna').value;
+        if (!nivel) return alert("Digita um número!");
+        document.getElementById('pergunta-section').style.display = 'none';
+        document.getElementById('analise-section').style.display = 'block';
+        let width = 0;
+        const bar = document.getElementById('bar');
+        const interval = setInterval(() => {
+            width++;
+            bar.style.width = width + '%';
+            if (width >= 100) {
+                clearInterval(interval);
+                document.getElementById('analise-section').style.display = 'none';
+                document.getElementById('resultado-final').style.display = 'block';
+                document.getElementById('resVagner').innerText = (parseInt(nivel) * 10) + 1000 + "%";
+            }
+        }, 30);
+    }
+    function irParaRoleta() {
+        document.getElementById('resultado-final').style.display = 'none';
+        document.getElementById('roleta-section').style.display = 'block';
+    }
+    function girarRoleta() {
+        const wheel = document.getElementById('wheel');
+        const texto = document.getElementById('premio-texto');
+        const premios = ["Uma noite com o Vagner! 🍷", "1 Beijo apaixonado! 💋", "Massagem relaxante! 💆‍♀️", "10 Beijos! 😘", "Uma Viagem Especial! ✈️", "Namorar! ❤️", "Casar! 💍"];
+        const sorteio = premios[Math.floor(Math.random() * premios.length)];
+        const graus = 2000 + Math.floor(Math.random() * 2000);
+        wheel.style.transform = `rotate(${graus}deg)`;
+        document.getElementById('btn-girar').style.display = "none";
+        texto.innerText = "Sorteando...";
+        setTimeout(() => { 
+            texto.innerHTML = "🎉 VOCÊ GANHOU:<br>" + sorteio + "<br><span class='resgate'>⚠️ Pegue seu prêmio agora com o Vagner!</span>"; 
+        }, 4000);
+    }
+</script>
+</body>
+</html>
