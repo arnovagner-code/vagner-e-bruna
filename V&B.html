@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nortbras - Conexão Vital ❤️</title>
+    <title>Conexão Vital: Vagner & Bruna ❤️</title>
     <style>
         :root { --ouro: #ffcc00; --perigo: #ff3300; --azul: #001a33; }
         body { font-family: 'Segoe UI', sans-serif; background: #0a0e12; color: white; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; text-align: center; }
@@ -34,9 +34,9 @@
 <div class="love-container">
     <div id="pergunta-section">
         <div class="couple-photos">
-            <div class="photo-frame"><img src="bruna.html"></div>
+            <div class="photo-frame"><img src="bruna.jpg.html"></div>
             <div class="heart-icon">❤️</div>
-            <div class="photo-frame"><img src="eu.html"></div>
+            <div class="photo-frame"><img src="vagner.jpg.html"></div>
         </div>
         <h1>AFINIDADE NORTBRAS</h1>
         <p style="font-size:12px;">Bruna, qual seu nível de interesse no Vagner?</p>
@@ -61,7 +61,7 @@
         <h1>ROLETA DE MIMOS ❤️</h1>
         <div class="wheel-box">
             <div class="pointer">👇</div>
-            <img src="eu.html" class="wheel-img" id="wheel">
+            <img src="vagner.jpg.html" class="wheel-img" id="wheel">
         </div>
         <button class="btn" id="btn-girar" onclick="girarRoleta()">GIRAR</button>
         <div id="premio-texto"></div>
@@ -100,7 +100,6 @@
         wheel.style.transform = `rotate(${graus}deg)`;
         document.getElementById('btn-girar').style.display = "none";
         texto.innerText = "Sorteando...";
-
         setTimeout(() => { 
             texto.innerHTML = "🎉 VOCÊ GANHOU:<br>" + sorteio + "<br><span class='resgate'>⚠️ Pegue seu prêmio agora com o Vagner!</span>"; 
         }, 4000);
